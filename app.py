@@ -217,7 +217,7 @@ class Ui_MainWindow(object):
                         generated = separator.join(newPassword)
 
                         self.textPassword.setText(generated)
-                    
+
                 else:
                     self.messagebox("Input Error", "Enter A Value from (8 - 32)", QMessageBox.Critical)
 
