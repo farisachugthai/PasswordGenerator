@@ -1,17 +1,27 @@
 # Config file for automatic testing at travis-ci.com
 
 language: python
+
+# And apparently 3.5 doesn't work but oh well
 python:
   - 3.8
   - 3.7
   - 3.6
-  - 3.5
+
+# isn't it odd that this isn't a default
+branches:
+  only:
+    - master
 
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox-travis -r requirements_dev.txt
+# so this is also erroring
+# sweet well i for one LOVE how travis and tox interact
+# - pip install -U tox-travis
+install:
+  - pip install -r requirements_dev.txt
 
 # Command to run tests, e.g. python setup.py test
-script: tox
+script: pytest
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the
