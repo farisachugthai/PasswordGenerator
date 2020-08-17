@@ -14,7 +14,7 @@ import random
 # import secrets
 import string
 import sys
-from string import ascii_lowercase, ascii_uppercase, digits, punctuation
+from string import ascii_lowercase, ascii_uppercase, digits
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(850, 378)
 
         # centralwidget object
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
         # topLabelFrame
@@ -47,7 +47,7 @@ class Ui_MainWindow(object):
         self.topLabel.setObjectName("topLabel")
 
         # formLayoutWidget
-        self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.formLayoutWidget = QWidget(self.centralwidget)
         self.formLayoutWidget.setGeometry(QtCore.QRect(310, 100, 253, 161))
         font = QtGui.QFont()
         font.setPointSize(6)
@@ -117,7 +117,7 @@ class Ui_MainWindow(object):
         self.checkUppercase.setText("")
         self.checkUppercase.setObjectName("checkUppercase")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.checkUppercase)
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget = QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(159, 280, 551, 89))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalButtons = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
@@ -127,7 +127,7 @@ class Ui_MainWindow(object):
         self.textPassword.setReadOnly(True)
         self.textPassword.setObjectName("textPassword")
         self.verticalButtons.addWidget(self.textPassword)
-        self.buttonGenerate = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.buttonGenerate = QPushButton(self.verticalLayoutWidget)
         self.buttonGenerate.setObjectName("buttonGenerate")
         self.verticalButtons.addWidget(self.buttonGenerate)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -137,10 +137,10 @@ class Ui_MainWindow(object):
 
         # custom made events
         # self.buttonGenerate.clicked.connect(self.clicked)
-        self.checkSymbols.stateChanged.connect(lambda:self.clickBox(self.checkSymbols))
-        self.checkNumbers.stateChanged.connect(lambda:self.clickBox(self.checkNumbers))
-        self.checkLowercase.stateChanged.connect(lambda:self.clickBox(self.checkLowercase))
-        self.checkUppercase.stateChanged.connect(lambda:self.clickBox(self.checkUppercase))
+        self.checkSymbols.stateChanged.connect(lambda: self.clickBox(self.checkSymbols))
+        self.checkNumbers.stateChanged.connect(lambda: self.clickBox(self.checkNumbers))
+        self.checkLowercase.stateChanged.connect(lambda: self.clickBox(self.checkLowercase))
+        self.checkUppercase.stateChanged.connect(lambda: self.clickBox(self.checkUppercase))
         # self.buttonGenerate.clicked.connect(self.length)
         self.buttonGenerate.clicked.connect(self.generatePassword)
 
@@ -163,7 +163,9 @@ class Ui_MainWindow(object):
         msgbox.setStandardButtons(QMessageBox.Ok)
         msgbox.buttonClicked.connect(self.popup)
 
-        x = msgbox.exec_()
+        # does this need to get assigned to x?
+        # x = msgbox.exec_()
+        msgbox.exec_()
 
     def popup(self, i):
         print(i.text())
@@ -196,19 +198,19 @@ class Ui_MainWindow(object):
         # listPassword is the combination of valid characters
         listPassword = []
 
-        if self.checkSymbols.isChecked() == True:
+        if self.checkSymbols.isChecked() is True:
             symbol = self.createSymbols()
             listPassword.extend(list(symbol))
 
-        if self.checkNumbers.isChecked() == True:
+        if self.checkNumbers.isChecked() is True:
             number = self.createNumbers()
             listPassword.extend(list(number))
 
-        if self.checkLowercase.isChecked() == True:
+        if self.checkLowercase.isChecked() is True:
             lowercase = self.createLowercase()
             listPassword.extend(list(lowercase))
 
-        if self.checkUppercase.isChecked() == True:
+        if self.checkUppercase.isChecked() is True:
             uppercase = self.createUppercase()
             listPassword.extend(list(uppercase))
         return listPassword
@@ -221,7 +223,8 @@ class Ui_MainWindow(object):
 
         >>> import secrets, string
         >>> alphabet = string.ascii_letters
-        >>> password = ''.join(secrets.choice(alphabet) for i in range(int(self.textPasswordLength.text())))
+        >>> pword = int(self.textPasswordLength.text())
+        >>> password = ''.join(secrets.choice(alphabet) for i in range(pword))
 
         """
         if (self.textPasswordLength.text() == ""):
@@ -231,11 +234,18 @@ class Ui_MainWindow(object):
                 length = int(self.textPasswordLength.text())
 
                 if not (8 <= length <= 99):
-                    self.messagebox("Input Error", "Enter A Value from (8 - 99)", QMessageBox.Critical)
+                    self.messagebox(
+                        "Input Error",
+                        "Enter A Value from (8 - 99)", QMessageBox.Critical
+                    )
                 else:
                     listPassword = self.generateValidCharacters()
                     if len(listPassword) == 0:
-                        self.messagebox("Password Error", "Select Checkboxes!", QMessageBox.Critical)
+                        self.messagebox(
+                            "Password Error",
+                            "Select one of the checkboxes to generate a password.",
+                            QMessageBox.Critical
+                        )
                     else:
                         newPassword = []
                         lengthList = len(listPassword)
@@ -251,18 +261,20 @@ class Ui_MainWindow(object):
                 self.messagebox("Unknown Error", "Please report on GitHub.", QMessageBox.Critical)
 
     def clickBox(self, state):
-        if state.isChecked() == True:
+        if state.isChecked() is True:
             print(state, 'Checked')
         else:
             print(state, 'Unchecked')
 
+
 def main():
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
 
 if __name__ == "__main__":
     main()

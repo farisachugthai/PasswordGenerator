@@ -34,17 +34,17 @@ Requirements
 - Python installation
 
 
-API
-====
+.. todo
+.. API
+.. ====
 
-.. currentmodule:: app
+.. .. currentmodule:: app
 
-
-.. automodule:: app
-   :synopsis: Initialize the password generator.
+.. .. automodule:: app
+..    :synopsis: Initialize the password generator.
 
 Credits
--------
+========
 
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
