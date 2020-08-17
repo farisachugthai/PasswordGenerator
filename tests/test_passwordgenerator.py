@@ -1,24 +1,18 @@
 #!/usr/bin/env python
-
 """Tests for `passwordgenerator` package."""
-
 import pytest
-
 
 from passwordgenerator import passwordgenerator
 
 
 @pytest.fixture
-def response():
+def main_window():
     """Sample pytest fixture.
 
     See more at: http://doc.pytest.org/en/latest/fixture.html
     """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
+    return passwordgenerator.Ui_MainWindow()
 
 
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
+def test_import(main_window):
+    assert main_window is not None

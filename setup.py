@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-
 """The setup script."""
-
 from setuptools import setup, find_packages
 
 with open('README.rst') as readme_file:
@@ -9,6 +7,15 @@ with open('README.rst') as readme_file:
 
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
+
+# So I'll admit there are a crazy # of ways to do this including runpy,
+# pkg_resources, importlib_metadata and more. Let's not go through ALL of
+# that and simply note that this needs to be updated in tandem with
+# ./passwordgenerator/__init__.py
+try:
+    from passwordgenerator import __version__
+except ImportError:
+    __version__ = '0.1.1'
 
 requirements = [ ]
 
@@ -43,6 +50,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/farisachugthai/passwordgenerator',
-    version='0.1.0',
+    version=__version__,
     zip_safe=False,
 )

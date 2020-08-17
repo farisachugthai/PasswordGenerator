@@ -21,7 +21,19 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox
 
 
 class Ui_MainWindow(object):
+    """The main window of the application.
+
+    .. todo::
+        Add in the appropriate properties and methods as we go.
+
+    Properties
+    ----------
+    textPasswordLength : QtWidgets.QLineEdit
+
+    """
+
     def setupUi(self, MainWindow):
+        """A python based implementation of building a QtApplication."""
         # MainWindow object
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(850, 378)
