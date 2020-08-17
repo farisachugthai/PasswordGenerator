@@ -6,5 +6,17 @@
 	],
 	"settings": {
 		"python.pythonPath": "C:\\Users\\Casey\\scoop\\apps\\miniconda3\\current\\envs\\pyqt\\python.exe"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Python: Current File",
+				"type": "python",
+				"request": "launch",
+				"program": "${file}",
+				"console": "integratedTerminal"
+			}
+		]
 	}
 }
