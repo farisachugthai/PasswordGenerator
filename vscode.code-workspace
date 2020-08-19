@@ -5,7 +5,7 @@
 		}
 	],
 	"settings": {
-		"python.pythonPath": "C:\\Users\\Casey\\scoop\\apps\\miniconda3\\current\\envs\\pyqt\\python.exe"
+		"python.pythonPath": ".tox\\py38\\Scripts\\python.exe"
 	},
 	"launch": {
 		"version": "0.2.0",

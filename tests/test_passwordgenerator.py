@@ -11,7 +11,8 @@ def main_window():
 
     See more at: http://doc.pytest.org/en/latest/fixture.html
     """
-    return passwordgenerator.Ui_MainWindow()
+    main = passwordgenerator.Ui_MainWindow()
+    return main.setupUi()
 
 
 def test_import(main_window):
