@@ -2,18 +2,10 @@
 """Tests for `passwordgenerator` package."""
 import pytest
 
-from passwordgenerator import passwordgenerator
+
+def test_import(ui_main_window):
+    assert ui_main_window is not None
 
 
-@pytest.fixture
-def main_window():
-    """Sample pytest fixture.
-
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    main = passwordgenerator.Ui_MainWindow()
-    return main.setupUi()
-
-
-def test_import(main_window):
-    assert main_window is not None
+if __name__ == '__main__':
+    pytest.main()
